@@ -22,23 +22,26 @@ while True:
         print(os.listdir('.'))  # папки и файлы рабочей дирректории
 
     elif choice == '5':
-        functions.list_file()  # файлы рабочей дирректории
+        functions.save_dir()  # сохраняем файлы и папки рабочей дирректории
 
     elif choice == '6':
-        functions.list_folders()  # папки рабочей дирректории
+        functions.list_file()  # файлы рабочей дирректории
 
     elif choice == '7':
+        functions.list_folders()  # папки рабочей дирректории
+
+    elif choice == '8':
         print('Информация об ОС:')
         print(platform.uname())   # информация об ОС
 
-    elif choice == '8':
+    elif choice == '9':
         print('Создатель программы: Шаров Игорь')   # автор программы
 
-    elif choice == '9':    # викторина
+    elif choice == '10':    # викторина
         print('Викторина')
         victory.victory()
 
-    elif choice == '10':    # банковский счет
+    elif choice == '11':    # банковский счет
         print('Мой банковский счет. Меню:')
         use_functions.banks()
 

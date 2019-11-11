@@ -1,5 +1,6 @@
 import os
 import shutil
+import json
 
 
 def print_menu():
@@ -7,13 +8,14 @@ def print_menu():
     print(2, '- Удалить (файл/папку)')
     print(3, '- Копировать (файл/папку)')
     print(4, '- Просмотр содержимого рабочей директории')
-    print(5, '- Файлы рабочей директории')
-    print(6, '- Папки рабочей директории')
-    print(7, '- Просмотр информации об операционной системе')
-    print(8, '- Создатель программы')
-    print(9, '- Играть в викторину')
-    print(10, '- Мой банковский счет')
-    print(11, '- Смена рабочей директории')
+    print(5, '- Сохранить содержимое рабочей директории в файл')
+    print(6, '- Файлы рабочей директории')
+    print(7, '- Папки рабочей директории')
+    print(8, '- Просмотр информации об операционной системе')
+    print(9, '- Создатель программы')
+    print(10, '- Играть в викторину')
+    print(11, '- Мой банковский счет')
+    print(12, '- Смена рабочей директории')
     print(0, '- Выход')
 
 
@@ -60,3 +62,17 @@ def change_dir():
     os.chdir(new_dir)
     print('Новая директория:', os.getcwd())
 
+
+def save_dir():
+    dir_dict = {
+        'files': [],
+        'dirs': [],
+    }
+    for file in os.listdir('.'):
+        if os.path.isfile(file):
+            dir_dict['files'].append(file)
+        else:
+            dir_dict['dirs'].append(file)
+    with open('listdir.txt', 'w') as f:
+        json.dump(dir_dict, f)
+    return dir_dict
