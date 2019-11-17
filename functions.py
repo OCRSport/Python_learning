@@ -20,30 +20,26 @@ def print_menu():
 
 
 def create_dir():
-    while True:
-        answer = input('Введите название новой папки: ')
-        if os.path.exists(answer):
-            print('Папка уже существует')
-        else:
-            os.mkdir(answer)
-            break
+    answer = input('Введите название новой папки: ')
+    print('Папка уже существует') if os.path.exists(answer) else os.mkdir(answer)
 
 
 def delete_dir():
-    answer = input('Введите название удаляемой папки/файла: ')
-    if os.path.isdir(answer):
-        os.removedirs(answer)
-    else:
-        os.remove(answer)
+    try:
+        answer = input('Введите название удаляемой папки/файла: ')
+        os.removedirs(answer) if os.path.isdir(answer) else os.remove(answer)
+    except FileNotFoundError:
+        print('Папка/файл не найдена')
 
 
 def copy_dir():
-    first_answer = input('Введите название копируемой папки/файла: ')
-    second_answer = input('Введите название новой папки/файла: ')
-    if os.path.isdir(first_answer):
-        shutil.copytree(first_answer, second_answer)
-    else:
-        shutil.copy(first_answer, second_answer)
+    try:
+        first_answer = input('Введите название копируемой папки/файла: ')
+        second_answer = input('Введите название новой папки/файла: ')
+        shutil.copytree(first_answer, second_answer) if os.path.isdir(first_answer) \
+            else shutil.copy(first_answer, second_answer)
+    except FileNotFoundError:
+        print('Папка/файл не найдена')
 
 
 def list_file():
@@ -64,15 +60,8 @@ def change_dir():
 
 
 def save_dir():
-    dir_dict = {
-        'files': [],
-        'dirs': [],
-    }
-    for file in os.listdir('.'):
-        if os.path.isfile(file):
-            dir_dict['files'].append(file)
-        else:
-            dir_dict['dirs'].append(file)
+    dir_dict = {'files': [file for file in os.listdir('.') if os.path.isfile(file)],
+                'dirs': [file for file in os.listdir('.') if os.path.isdir(file)]}
     with open('listdir.txt', 'w') as f:
         json.dump(dir_dict, f)
     return dir_dict

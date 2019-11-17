@@ -20,14 +20,20 @@ def banks():
 
         choice = input('Выберите пункт меню: ')
         if choice == '1':
-            payment = int(input('Введите сумму пополнения счета: '))
-            account += payment
-            print('Баланс счета:', account)
+            try:
+                payment = int(input('Введите сумму пополнения счета: '))
+                account += payment
+                print('Баланс счета:', account)
+            except ValueError:
+                print('Вы ввели не число')
 
         elif choice == '2':
-            price_product = int(input('Введите стоимость покупки: '))
-            if price_product > account:
-                print('На счете не достаточно средств')
+            try:
+                price_product = int(input('Введите стоимость покупки: '))
+                if price_product > account:
+                    print('На счете не достаточно средств')
+            except ValueError:
+                print('Вы ввели не число')
             else:
                 name_product = input('Введите название покупки: ')
                 account -= price_product
