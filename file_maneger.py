@@ -51,4 +51,6 @@ while True:
     elif choice == '0':
         print('Вы вышли из программы')
         break
+    else:
+        print('Вы ввели неверный пункт меню')
 

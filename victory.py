@@ -14,20 +14,20 @@ def victory():
     writers['Есенин'] = '03.10.1895', 'третье ноября 1895 года'
     writers['Булгаков'] = '15.09.1891', 'пятнадцатое сентября 1891 года'
 
-    selection = random.sample(writers.keys(), 5)
+    k = 5
+    selection = random.sample(writers.keys(), k)
     while True:
         true_answer = 0
-        for i in range(5):
-            selection_i = selection[i]
-            print('Введите дату рождения (дд.мм.гг)', selection_i, ':')
+        for i in range(k):
+            print('Введите дату рождения (дд.мм.гг)', selection[i], ':')
             answer = str(input())
-            if answer == writers[selection_i][0]:
+            if answer == writers[selection[i]][0]:
                 true_answer += 1
                 print('Верно')
             else:
-                print("Неверно. Правильный ответ: ", writers[selection_i][1])
+                print("Неверно. Правильный ответ: ", writers[selection[i]][1])
         print('Количество правильных ответов: ', true_answer)
-        print('Количество ошибок: ', 5 - true_answer)
+        print('Количество ошибок: ', k - true_answer)
         new_victory = input('Начать викторину сначала? Да/Нет ')
         if new_victory == 'Нет':
             break
